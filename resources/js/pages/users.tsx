@@ -1,7 +1,8 @@
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
+import { useEffect, useState } from "react";
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem } from '@/types';
+import { type BreadcrumbItem, type User } from '@/types';
 import { Head } from '@inertiajs/react';
+import api from "@/axios/config";
 
 
 const breadcrumbs : BreadcrumbItem[] = [
@@ -13,6 +14,21 @@ const breadcrumbs : BreadcrumbItem[] = [
 
 
 export default function Users() {
+
+    const [users, setUsers] = useState<User[]>([]);
+
+
+    useEffect(() => {
+        api.get<User[]>("/users")
+          .then(response => {
+            setUsers(response.data);
+          })
+          .catch(error => {
+            console.error("Error fetching users:", error);
+          });
+    }, []);
+    
+    
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
                     <Head title="Users" />
