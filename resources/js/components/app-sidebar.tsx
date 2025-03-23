@@ -28,6 +28,7 @@ const mainNavItems: NavItem[] = [
         href: '/payments',
         icon: Banknote,
     },
+    
 ];
 
 const footerNavItems: NavItem[] = [
