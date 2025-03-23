@@ -9,9 +9,6 @@ class UserService {
 
     public function getUsers() {
         $users = User::all();
-        return $this->apiResponse([
-            'status' => true,
-            'data' => $users
-        ]);
+        return $this->apiResponse($users);
     }
 }
