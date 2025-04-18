@@ -40,3 +40,11 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export interface Booking {
+    id: number,
+    title: String,
+    bookingNo: String,
+    bookingCost: double,
+    bookingCostCurrency: String
+}
