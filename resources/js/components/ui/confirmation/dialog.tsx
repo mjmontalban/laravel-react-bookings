@@ -12,14 +12,11 @@ import {
   import { Button } from "@/components/ui/button"
   import { Loader2 } from "lucide-react";
   import { useState } from 'react';
-  
+
   type AlertConfirmationProps = {
     id: number;
     onDelete?: (id: number) => void;
   };
-
-  import api from "@/axios/config";
-
   export default function AlertConfirmation(props: AlertConfirmationProps) {
 
     const [ loading, setLoading ] = useState(false);
