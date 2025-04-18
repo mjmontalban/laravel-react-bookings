@@ -40,8 +40,7 @@ import {
 
 
   const onDelete = (id: number) => {
-   
-
+  
     api.delete('/delete_booking', {
         data: {id: id}
     }).then((response) => {
