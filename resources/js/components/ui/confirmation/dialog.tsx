@@ -15,7 +15,7 @@ import {
 
   type AlertConfirmationProps = {
     id: number;
-    onDelete?: (id: number) => void;
+    onDelete: (id: number) => void;
   };
   export default function AlertConfirmation(props: AlertConfirmationProps) {
 
@@ -26,9 +26,8 @@ import {
         setLoading(true);
         setDisable(true);
 
-        if(props.onDelete) 
-            await props.onDelete(id);
-       
+        await props.onDelete(id);
+            
         setLoading(false);
         setDisable(false);
     }
