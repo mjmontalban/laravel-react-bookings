@@ -15,6 +15,6 @@ class BookingService {
     }
 
     public function deleteBooking($request) {
-      
+        return $this->bookingRepository->deleteBooking($request);
     }
 }

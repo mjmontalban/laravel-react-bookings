@@ -17,7 +17,24 @@ class BookingRepository implements BookingRepositoryInterface {
         return BookingResource::collection($bookings);
     }
 
-    public function deleteBooking() {
-        
+    public function deleteBooking($request) {
+
+        try {
+            $booking = Booking::find($request->get('id'));
+
+            $booking->is_deleted = 1;
+
+            $booking->save();
+        } catch (\Exception $e) {
+            return response()->json([
+                "status" => false,
+                "message" => $e->getMessage()
+            ]);
+        }
+
+        return response()->json([
+            "status" => true,
+            "message" => "Booking Deleted Successfully."
+        ]);
     }
 }

@@ -15,4 +15,8 @@ class BookingController extends Controller
     public function get_bookings(Request $request) {
         return $this->bookingService->getBookings($request);
     }
+
+    public function delete_booking(Request $request) {
+        return $this->bookingService->deleteBooking($request);
+    }
 }

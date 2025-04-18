@@ -17,6 +17,8 @@ import {
     // onConfirm?: (id: number) => void;
   };
 
+  import api from "@/axios/config";
+
   export default function AlertConfirmation(props: AlertConfirmationProps) {
 
     const [ loading, setLoading ] = useState(false);
@@ -25,6 +27,15 @@ import {
     const handleDelete = (id: number) => {
         setLoading(true);
         setDisable(true);
+
+        api.delete('/delete_booking', {
+            data: {id: id}
+        }).then((response) => {
+            setLoading(false);
+            setDisable(false);
+        }).catch((error) => {
+            console.error("Error deleting booking:", error);
+        });
     }
 
     return (

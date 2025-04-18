@@ -5,6 +5,6 @@ interface BookingRepositoryInterface {
 
     public function getBookings ();
 
-    public function deleteBooking ();
+    public function deleteBooking ($request);
 
 }

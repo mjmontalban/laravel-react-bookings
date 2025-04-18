@@ -34,7 +34,9 @@ import {
   import { Trash2 } from 'lucide-react';
 
   import { useState, useEffect } from "react"
+
   import api from "@/axios/config";
+  
   import SkeletonLoader from "@/components/ui/loader/skeleton";
   import { type Booking } from '@/types';
 
