@@ -21,13 +21,15 @@ import {
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
 
+  import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+
   import {
     Button
   } from "@/components/ui/button"
 
-  // import {
-  //   AlertConfirmation
-  // } from "@/components/ui/confirmation/dialog"
+  import 
+    AlertConfirmation
+   from "@/components/ui/confirmation/dialog"
 
   import { Trash2 } from 'lucide-react';
 
@@ -79,7 +81,7 @@ import {
               <TableCell>{booking.bookingCostCurrency} {booking.bookingCost}</TableCell>
               <TableCell>{booking.status}</TableCell>
               <TableCell className="text-right">
-                <Button variant="destructive"><Trash2/>Delete</Button>
+                <AlertConfirmation id={booking.id}  />
               </TableCell>
               
             </TableRow>

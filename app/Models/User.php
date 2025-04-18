@@ -46,6 +46,9 @@ class User extends Authenticatable
         ];
     }
 
+    const UPDATED_AT = 'date_modified';
+    const CREATED_AT = 'date_created';
+
     protected $table = 'listing';
     protected $primaryKey = 'listing_id';
 }

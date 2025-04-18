@@ -11,11 +11,20 @@ import {
   } from "@/components/ui/alert-dialog"
   import { Button } from "@/components/ui/button"
   
-  export default function AlertConfirmation() {
+  type AlertConfirmationProps = {
+    id: number;
+    // onConfirm?: (id: number) => void;
+  };
+
+  export default function AlertConfirmation(props: AlertConfirmationProps) {
+
+    const handleDelete = (id: number) => {
+        alert(id);
+    }
     return (
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant="outline">Show Dialog</Button>
+          <Button variant="destructive">Delete Booking</Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -27,7 +36,7 @@ import {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction>Continue</AlertDialogAction>
+            <AlertDialogAction onClick={ () => handleDelete(props.id)}>Continue</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
