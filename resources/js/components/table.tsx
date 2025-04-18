@@ -9,6 +9,8 @@ import {
     TableRow,
   } from "@/components/ui/table"
 
+  import { toast } from "sonner"
+
   import 
     AlertConfirmation
    from "@/components/ui/confirmation/dialog"
@@ -44,9 +46,15 @@ import {
     api.delete('/delete_booking', {
         data: {id: id}
     }).then((response) => {
+
+      toast.success(response.data.message); // show toast after deleting booking
+      
       setBookings((prevRows) => prevRows.filter((row) => row.id !== id));
+
     }).catch((error) => {
+
         console.error("Error deleting booking:", error);
+
     });
 }
   
