@@ -14,7 +14,7 @@ import {
   import { useState } from 'react';
   type AlertConfirmationProps = {
     id: number;
-    // onConfirm?: (id: number) => void;
+    onDelete?: (id: number) => void;
   };
 
   import api from "@/axios/config";
@@ -24,18 +24,15 @@ import {
     const [ loading, setLoading ] = useState(false);
     const [ disable, setDisable ] = useState(false);
 
-    const handleDelete = (id: number) => {
+    const handleDelete = async (id: number) => {
         setLoading(true);
         setDisable(true);
 
-        api.delete('/delete_booking', {
-            data: {id: id}
-        }).then((response) => {
-            setLoading(false);
-            setDisable(false);
-        }).catch((error) => {
-            console.error("Error deleting booking:", error);
-        });
+        if(props.onDelete) 
+            await props.onDelete(id);
+       
+        setLoading(false);
+        setDisable(false);
     }
 
     return (

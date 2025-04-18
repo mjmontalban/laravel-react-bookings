@@ -9,24 +9,6 @@ import {
     TableRow,
   } from "@/components/ui/table"
 
-  import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-  } from "@/components/ui/alert-dialog"
-
-  import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-
-  import {
-    Button
-  } from "@/components/ui/button"
-
   import 
     AlertConfirmation
    from "@/components/ui/confirmation/dialog"
@@ -36,7 +18,7 @@ import {
   import { useState, useEffect } from "react"
 
   import api from "@/axios/config";
-  
+
   import SkeletonLoader from "@/components/ui/loader/skeleton";
   import { type Booking } from '@/types';
 
@@ -55,6 +37,20 @@ import {
       });
 
   }, []);
+
+
+  const onDelete = (id: number) => {
+   
+
+    api.delete('/delete_booking', {
+        data: {id: id}
+    }).then((response) => {
+      setBookings((prevRows) => prevRows.filter((row) => row.id !== id));
+    }).catch((error) => {
+        console.error("Error deleting booking:", error);
+    });
+}
+  
 
   if (loading) return <SkeletonLoader />;
 
@@ -83,7 +79,7 @@ import {
               <TableCell>{booking.bookingCostCurrency} {booking.bookingCost}</TableCell>
               <TableCell>{booking.status}</TableCell>
               <TableCell className="text-right">
-                <AlertConfirmation id={booking.id}  />
+                <AlertConfirmation id={booking.id} onDelete={onDelete}  />
               </TableCell>
               
             </TableRow>
