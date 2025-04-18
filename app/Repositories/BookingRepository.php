@@ -7,7 +7,12 @@ use App\Http\Resources\BookingResource;
 class BookingRepository implements BookingRepositoryInterface {
 
     public function getBookings() {
-        $bookings = Booking::query()->take(10)->skip(0)->get();
+        $bookings = Booking::query()
+        ->with(['user'])
+        ->take(10)
+        ->skip(0)
+        ->orderByDesc('id')
+        ->get();
 
         return BookingResource::collection($bookings);
     }

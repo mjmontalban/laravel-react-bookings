@@ -19,7 +19,11 @@ class BookingResource extends JsonResource
             "title" => $this->title,
             "bookingNo" => $this->booking_no,
             "bookingCost" => $this->agency_budget_amount,
-            "bookingCostCurrency" => $this->agency_budget_currency_code
+            "bookingCostCurrency" => $this->agency_budget_currency_code,
+            "status" => $this->status,
+            "user" => $this->whenLoaded("user", function($user) {
+                return new UserResource($user);
+            })
         ];
     }
 }

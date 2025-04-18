@@ -41,10 +41,17 @@ export interface User {
     [key: string]: unknown; // This allows for additional properties...
 }
 
+interface Listing {
+    id: number,
+    name: String
+}
+
 export interface Booking {
     id: number,
     title: String,
     bookingNo: String,
     bookingCost: double,
-    bookingCostCurrency: String
+    bookingCostCurrency: String,
+    status: String
+    user: Listing
 }

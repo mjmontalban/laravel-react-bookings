@@ -8,7 +8,13 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
-  
+
+  import {
+    Button
+  } from "@/components/ui/button"
+
+  import { Trash2 } from 'lucide-react';
+
   import { useState, useEffect } from "react"
   import api from "@/axios/config";
   import SkeletonLoader from "@/components/ui/loader/skeleton";
@@ -34,31 +40,42 @@ import {
 
     return (
       <Table>
-        <TableCaption>A list of your recent invoices.</TableCaption>
+        <TableCaption>A list of your recent bookings.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">ID</TableHead>
-            <TableHead>Title</TableHead>
             <TableHead>Booking No</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
+            <TableHead>User</TableHead>
+            <TableHead>Title</TableHead>
+            <TableHead>Amount</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead className="text-right">Action</TableHead>
+
           </TableRow>
         </TableHeader>
         <TableBody>
           {bookings.map((booking) => (
             <TableRow key={booking.id}>
               <TableCell className="font-medium">{booking.id}</TableCell>
-              <TableCell>{booking.title}</TableCell>
               <TableCell>{booking.bookingNo}</TableCell>
-              <TableCell className="text-right">{booking.bookingCostCurrency} {booking.bookingCost}</TableCell>
+              <TableCell>{booking.user.name}</TableCell>
+              <TableCell>{booking.title}</TableCell>
+              <TableCell>{booking.bookingCostCurrency} {booking.bookingCost}</TableCell>
+              <TableCell>{booking.status}</TableCell>
+              <TableCell className="text-right">
+                <Button variant="destructive"><Trash2/>Delete</Button>
+              </TableCell>
+              
             </TableRow>
           ))}
         </TableBody>
-        <TableFooter>
+
+        {/* <TableFooter>
           <TableRow>
             <TableCell colSpan={3}>Total</TableCell>
             <TableCell className="text-right">$2,500.00</TableCell>
           </TableRow>
-        </TableFooter>
+        </TableFooter> */}
       </Table>
     )
   }
