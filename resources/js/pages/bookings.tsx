@@ -32,7 +32,7 @@ const breadcrumbs : BreadcrumbItem[] = [
 
 export default function Bookings() {
 
-    const limit = 20;
+    const limit = 15;
     const [offset, setOffset] = useState(0);
     const [bookings, setBookings] = useState<Booking[]>([]);
     const [loading, setLoading] = useState(true);
