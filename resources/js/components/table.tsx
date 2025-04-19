@@ -9,75 +9,23 @@ import {
     TableRow,
   } from "@/components/ui/table"
 
-  import { toast } from "sonner"
-
+  import { type Booking } from '@/types';
+  import { Button } from "@/components/ui/button"
   import 
     AlertConfirmation
    from "@/components/ui/confirmation/dialog"
 
-   import { Button } from "@/components/ui/button"
-
-  import { useState, useEffect } from "react"
-
-  import api from "@/axios/config";
-
-  import SkeletonLoader from "@/components/ui/loader/skeleton";
-  import { type Booking } from '@/types';
-
-  export default function DataTable() {
-    const limit = 20;
-    const [offset, setOffset] = useState(0);
-    const [bookings, setBookings] = useState<Booking[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-
-      api.get('/get_bookings', {
-        params: {
-          limit: limit,
-          offset: offset
-        }
-      }).then((response) => {
-
-        setBookings([...bookings, ...response.data.data]);
-
-        setLoading(false);
-      }).catch((error) => {
-        console.error("Error fetching users:", error);
-        setLoading(false);
-      });
-
-  }, [offset]);
-
-
-  const handleLoadMore = () => {
-    setOffset(bookings.length);
+  interface DatatableProps {
+    bookings: Booking[];
+    onLoadMore: () => void;
+    onDelete: (id: number) => void;
   }
-
-  const onDelete = (id: number) => {
-  
-    api.delete('/delete_booking', {
-        data: {id: id}
-    }).then((response) => {
-
-      toast.success(response.data.message); // show toast after deleting booking
-      
-      setBookings((prevRows) => prevRows.filter((row) => row.id !== id));
-
-    }).catch((error) => {
-
-        console.error("Error deleting booking:", error);
-
-    });
-}
-  
-
-  if (loading) return <SkeletonLoader />;
+  export default function DataTable(props: DatatableProps) {
 
     return (
       <Table>
         <TableCaption>
-            <Button variant="default" onClick={handleLoadMore}> Load More </Button>
+            <Button variant="default" onClick={props.onLoadMore}> Load More </Button>
         </TableCaption>
         <TableHeader>
           <TableRow>
@@ -92,7 +40,7 @@ import {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {bookings.map((booking) => (
+          {props.bookings.map((booking) => (
             <TableRow key={booking.id}>
               <TableCell className="font-medium">{booking.id}</TableCell>
               <TableCell>{booking.bookingNo}</TableCell>
@@ -101,7 +49,7 @@ import {
               <TableCell>{booking.bookingCostCurrency} {booking.bookingCost}</TableCell>
               <TableCell>{booking.status}</TableCell>
               <TableCell className="text-right">
-                <AlertConfirmation id={booking.id} onDelete={onDelete}  />
+                <AlertConfirmation id={booking.id} onDelete={props.onDelete}  />
               </TableCell>
               
             </TableRow>
