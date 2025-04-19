@@ -21,7 +21,7 @@ import {
 
     const [ loading, setLoading ] = useState(false);
     const [ disable, setDisable ] = useState(false);
-
+    const [ isOpen, setIsOpen ] = useState(false);
     const handleDelete = async (id: number) => {
         setLoading(true);
         setDisable(true);
@@ -34,10 +34,10 @@ import {
     }
 
     return (
-      <AlertDialog>
-        <AlertDialogTrigger asChild>
-          <Button variant="destructive">Delete Booking</Button>
-        </AlertDialogTrigger>
+      <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+        {/* <AlertDialogTrigger asChild> */}
+          <Button onClick={() => setIsOpen(true)} variant="destructive">Delete Booking</Button>
+        {/* </AlertDialogTrigger> */}
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure to delete this booking?</AlertDialogTitle>
@@ -47,7 +47,7 @@ import {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <Button disabled={disable} variant={'outline'}>Cancel</Button>
+            <Button disabled={disable} onClick={() => setIsOpen(false)} variant={'outline'}>Cancel</Button>
             <Button variant={'outline'} onClick={ () => handleDelete(props.id)}>
                 {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 {loading ? "Please wait" : "Continue"}
