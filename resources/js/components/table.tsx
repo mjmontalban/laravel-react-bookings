@@ -20,6 +20,7 @@ import {
     onLoadMore: () => void;
     onDelete: (id: number) => void;
   }
+  
   export default function DataTable(props: DatatableProps) {
 
     return (
