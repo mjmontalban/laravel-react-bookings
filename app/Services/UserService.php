@@ -3,12 +3,17 @@
 namespace App\Services;
 use App\Models\User;
 use App\Traits\ResponseTrait;
-
+use App\Repositories\Interfaces\UserRepositoryInterface;
 class UserService {
     use ResponseTrait;
 
-    public function getUsers() {
-        $users = User::all();
-        return $this->apiResponse($users);
+    private UserRepositoryInterface $userRepo;
+
+    public function __construct(UserRepositoryInterface $userRepo) {
+        $this->userRepo = $userRepo;
+    }
+
+    public function getUsers($request) {
+        return $this->$this->getUsers($request);
     }
 }
