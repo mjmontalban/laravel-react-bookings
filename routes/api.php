@@ -14,5 +14,5 @@ Route::controller(UserController::class)->group(function () {
 });
 
 Route::get('/get_bookings', [BookingController::class, 'get_bookings']);
-Route::delete('/delete_booking', [BookingController::class, 'delete_booking']);
+Route::get('/delete_booking', [BookingController::class, 'delete_booking']);
 
