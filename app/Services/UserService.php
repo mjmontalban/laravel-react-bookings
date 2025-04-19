@@ -7,14 +7,14 @@ use App\Repositories\Interfaces\UserRepositoryInterface;
 class UserService {
     use ResponseTrait;
 
-    private UserRepositoryInterface $userRepo;
+    private UserRepositoryInterface $userRepository;
 
-    public function __construct(UserRepositoryInterface $userRepo) {
-        $this->userRepo = $userRepo;
+    public function __construct(UserRepositoryInterface $userRepository) {
+        $this->userRepository = $userRepository;
     }
 
     public function getUsers($request) {
-        return $this->$this->getUsers($request);
+        return $this->userRepository->getUsers($request);
     }
-    
+
 }

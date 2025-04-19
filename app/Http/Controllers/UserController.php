@@ -8,9 +8,10 @@ class UserController extends Controller
 {
     private UserService $userService;
 
-    public function __construct() {
-        $this->userService = (new UserService());
+    public function __construct(UserService $userService) {
+        $this->userService = $userService;
     }
+    
     public function getUsers(Request $request) {
         return $this->userService->getUsers($request);
     }
