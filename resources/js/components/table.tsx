@@ -15,7 +15,7 @@ import {
     AlertConfirmation
    from "@/components/ui/confirmation/dialog"
 
-  import { Trash2 } from 'lucide-react';
+   import { Button } from "@/components/ui/button"
 
   import { useState, useEffect } from "react"
 
@@ -25,21 +25,34 @@ import {
   import { type Booking } from '@/types';
 
   export default function DataTable() {
+    const limit = 20;
+    const [offset, setOffset] = useState(0);
     const [bookings, setBookings] = useState<Booking[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
 
-      api.get('/get_bookings').then((response) => {
-        setBookings(response.data.data);
+      api.get('/get_bookings', {
+        params: {
+          limit: limit,
+          offset: offset
+        }
+      }).then((response) => {
+
+        setBookings([...bookings, ...response.data.data]);
+
         setLoading(false);
       }).catch((error) => {
         console.error("Error fetching users:", error);
         setLoading(false);
       });
 
-  }, []);
+  }, [offset]);
 
+
+  const handleLoadMore = () => {
+    setOffset(bookings.length);
+  }
 
   const onDelete = (id: number) => {
   
@@ -63,7 +76,9 @@ import {
 
     return (
       <Table>
-        <TableCaption>A list of your recent bookings.</TableCaption>
+        <TableCaption>
+            <Button variant="default" onClick={handleLoadMore}> Load More </Button>
+        </TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">ID</TableHead>

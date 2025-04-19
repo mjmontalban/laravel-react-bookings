@@ -6,11 +6,11 @@ use App\Models\Booking;
 use App\Http\Resources\BookingResource;
 class BookingRepository implements BookingRepositoryInterface {
 
-    public function getBookings() {
+    public function getBookings($request) {
         $bookings = Booking::query()
         ->with(['user'])
-        ->take(10)
-        ->skip(0)
+        ->take($request->get('limit'))
+        ->skip($request->get('offset'))
         ->orderByDesc('id')
         ->get();
 
