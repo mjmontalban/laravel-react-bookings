@@ -9,19 +9,16 @@ import {
     TableRow,
   } from "@/components/ui/table"
 
-  import { type Booking } from '@/types';
   import { Button } from "@/components/ui/button"
-  import 
-    AlertConfirmation
-   from "@/components/ui/confirmation/dialog"
 
-  interface DatatableProps {
-    bookings: Booking[];
+
+  interface DatatableProps<T> {
+    items: T[];
     onLoadMore: () => void;
-    onDelete: (id: number) => void;
+    renderRow: (item: T) => React.ReactNode;
   }
-  
-  export default function DataTable(props: DatatableProps) {
+
+  export default function DataTable<T>(props: DatatableProps<T>) {
 
     return (
       <Table>
@@ -41,20 +38,11 @@ import {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {props.bookings.map((booking) => (
-            <TableRow key={booking.id}>
-              <TableCell className="font-medium">{booking.id}</TableCell>
-              <TableCell>{booking.bookingNo}</TableCell>
-              <TableCell>{booking.user.name}</TableCell>
-              <TableCell>{booking.title}</TableCell>
-              <TableCell>{booking.bookingCostCurrency} {booking.bookingCost}</TableCell>
-              <TableCell>{booking.status}</TableCell>
-              <TableCell className="text-right">
-                <AlertConfirmation id={booking.id} onDelete={props.onDelete}  />
-              </TableCell>
-              
-            </TableRow>
-          ))}
+        {props.items.map((item, index) => (
+          <TableRow key={index}>
+            {props.renderRow(item)}
+          </TableRow>
+        ))}
         </TableBody>
 
         {/* <TableFooter>

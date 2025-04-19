@@ -19,6 +19,9 @@ import api from "@/axios/config";
 import SkeletonLoader from "@/components/ui/loader/skeleton";
 import { type Booking } from '@/types';
 
+import { TableCell } from "@/components/ui/table"
+import AlertConfirmation from "@/components/ui/confirmation/dialog"
+
 const breadcrumbs : BreadcrumbItem[] = [
     {
         title: 'Bookings',
@@ -90,7 +93,23 @@ export default function Bookings() {
                     </div>
                     <div className="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border md:min-h-min">
                         <div className="absolute inset-0 size-full overflow-auto p-4 stroke-neutral-900/20 dark:stroke-neutral-100/20">
-                            <DataTable bookings={bookings} onLoadMore={handleLoadMore} onDelete={onDelete}/>
+                            <DataTable<Booking> 
+                                items={bookings} 
+                                onLoadMore={handleLoadMore} 
+                                renderRow={(item) => (
+                                    <>
+                                      <TableCell className="font-medium">{item.id}</TableCell>
+                                      <TableCell>{item.bookingNo}</TableCell>
+                                      <TableCell>{item.user.name}</TableCell>
+                                      <TableCell>{item.title}</TableCell>
+                                      <TableCell>{item.bookingCostCurrency} {item.bookingCost}</TableCell>
+                                      <TableCell>{item.status}</TableCell>
+                                      <TableCell className="text-right">
+                                        <AlertConfirmation id={item.id} onDelete={onDelete} />
+                                      </TableCell>
+                                    </>
+                                  )}
+                            />
                         </div>
                     </div>
                 </div>
