@@ -8,6 +8,10 @@ import DataTable from '@/components/table';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
+import { PlatformDatePicker } from "@/components/platform/datepicker"
+import { PlatformSelect } from "@/components/platform/select"
+
+
 const breadcrumbs : BreadcrumbItem[] = [
     {
         title: 'Bookings',
@@ -36,8 +40,8 @@ export default function Bookings() {
                         </div> */}
                         <div className="flex w-full max-w-7xl items-center gap-2 px-4xx">
                             <Input type="text" placeholder="Input any keyword" className="flex-1" />
-                            <Input type="text" placeholder="Input any keyword" className="flex-1"/>
-                            <Input type="text" placeholder="Input any keyword" className="flex-1"/>
+                            <PlatformSelect />
+                            <PlatformDatePicker />
                             <Button type="button">Search</Button>
                         </div>
                         <div className="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border md:min-h-min">
