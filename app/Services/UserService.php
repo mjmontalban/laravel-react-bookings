@@ -16,4 +16,5 @@ class UserService {
     public function getUsers($request) {
         return $this->$this->getUsers($request);
     }
+    
 }
