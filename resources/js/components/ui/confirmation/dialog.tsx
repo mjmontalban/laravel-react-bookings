@@ -30,7 +30,7 @@ import {
             
         setLoading(false);
         setDisable(false);
-
+        setIsOpen(false);
     }
 
     return (
