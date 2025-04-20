@@ -14,6 +14,7 @@ import {
     items: T[];
     onLoadMore: () => void;
     renderRow: (item: T) => React.ReactNode;
+    renderHead: () => React.ReactNode;
   }
 
   export default function DataTable<T>(props: DatatableProps<T>) {
@@ -25,14 +26,7 @@ import {
         </TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">ID</TableHead>
-            <TableHead>Booking No</TableHead>
-            <TableHead>User</TableHead>
-            <TableHead>Title</TableHead>
-            <TableHead>Amount</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead className="text-right">Action</TableHead>
-
+            {props.renderHead()}
           </TableRow>
         </TableHeader>
         <TableBody>

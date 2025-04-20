@@ -19,7 +19,7 @@ import api from "@/axios/config";
 import SkeletonLoader from "@/components/ui/loader/skeleton";
 import { type Booking } from '@/types';
 
-import { TableCell } from "@/components/ui/table"
+import { TableCell, TableHead } from "@/components/ui/table"
 import AlertConfirmation from "@/components/ui/confirmation/dialog"
 
 const breadcrumbs : BreadcrumbItem[] = [
@@ -108,7 +108,18 @@ export default function Bookings() {
                                         <AlertConfirmation id={item.id} onDelete={onDelete} />
                                       </TableCell>
                                     </>
-                                  )}
+                                )}
+                                renderHead={() => (
+                                    <>
+                                        <TableHead className="w-[100px]">ID</TableHead>
+                                        <TableHead>Booking No</TableHead>
+                                        <TableHead>User</TableHead>
+                                        <TableHead>Title</TableHead>
+                                        <TableHead>Amount</TableHead>
+                                        <TableHead>Status</TableHead>
+                                        <TableHead className="text-right">Action</TableHead>
+                                    </>
+                                )}
                             />
                         </div>
                     </div>

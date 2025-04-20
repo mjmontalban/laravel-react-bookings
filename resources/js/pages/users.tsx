@@ -9,7 +9,7 @@ import api from "@/axios/config";
 
 import AlertConfirmation from "@/components/ui/confirmation/dialog"
 import SkeletonLoader from "@/components/ui/loader/skeleton";
-import { TableCell } from "@/components/ui/table"
+import { TableCell, TableHead } from "@/components/ui/table"
 
 const breadcrumbs : BreadcrumbItem[] = [
     {
@@ -65,7 +65,14 @@ export default function Users() {
                                         <AlertConfirmation id={item.id} onDelete={()=>{}} />
                                       </TableCell>
                                     </>
-                                  )}
+                                )}
+                                renderHead={() => (
+                                    <>
+                                        <TableHead className="w-[100px]">ID</TableHead>
+                                        <TableHead>Name</TableHead>
+                                        <TableHead className="text-right">Action</TableHead>
+                                    </>
+                                )}
                             />
                         </div>
                     </div>
